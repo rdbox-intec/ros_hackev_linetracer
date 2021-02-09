@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<launch>
+  <node name="mock" pkg="ros_hackev_linetracer" type="mock.py"></node>
+  <node name="hackev_lintracer" pkg="ros_hackev_linetracer" type="linetracer.py">
+    <param name="white" value="80.0"></param>
+    <param name="black" value="20.0"></param>
+    <param name="kp" value="1.8"></param>
+    <param name="ki" value="1.67"></param>
+    <param name="kd" value="0.0324"></param>
+    <param name="td" value="0.027"></param>
+    <param name="power" value="10"></param>
+  </node>
+  <test test-name="hztest" type="hztest" pkg="rostest" name="hztest">
+    <param name="topic" value="ev3rt/motor_steer"/>
+    <param name="hz" value="30"/>
+    <param name="hzerror" value="1"/>
+    <param name="test_duration" value="1"/>
+  </test>
+  <test test-name="pubtest" type="publishtest" pkg="rostest">
+  <rosparam>
+    topics:
+      - name: ev3rt/motor_steer
+        timeout: 1
+        negative: False
+   </rosparam>
+  </test>
+  <test test-name="unit" type="test_linetracer.py" pkg="ros_hackev_linetracer"/>
+</launch>

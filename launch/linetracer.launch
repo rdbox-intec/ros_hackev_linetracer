@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- args -->
+  <arg name="white" default="80.0"></arg>
+  <arg name="black" default="20.0"></arg>
+  <arg name="kp" default="1.8"></arg>
+  <arg name="ki" default="1.67"></arg>
+  <arg name="kd" default="0.0324"></arg>
+  <arg name="td" default="0.027"></arg>
+  <arg name="power" default="10"></arg>
+
+  <!-- node -->
+  <node name="hackev_lintracer" pkg="ros_hackev_linetracer" type="linetracer.py">
+    <param name="white" value="$(arg white)" type="double"></param>
+    <param name="black" value="$(arg black)" type="double"></param>
+    <param name="kp" value="$(arg kp)" type="double"></param>
+    <param name="ki" value="$(arg ki)" type="double"></param>
+    <param name="kd" value="$(arg kd)" type="double"></param>
+    <param name="td" value="$(arg td)" type="double"></param>
+    <param name="power" value="$(arg power)" type="int"></param>
+  </node>
+
+</launch>
