@@ -1,0 +1,4 @@
+[submodule "r2s2_for_rostest"]
+	path = r2s2_for_rostest
+	url = https://github.com/rdbox-intec/r2s2_for_rostest.git
+	branch = main

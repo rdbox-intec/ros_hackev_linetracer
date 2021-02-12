@@ -64,6 +64,8 @@
     <param name="preconditions/reception_url" type="str" value="$(optenv R2S2_URL '')" />
     <param name="preconditions/timeout_sec" type="int" value="$(optenv R2S2_TIMEOUT 300)" />
     <param name="preconditions/namespace" type="str" value="$(optenv R2S2_NAMESPACE rdbox-systems)" />
+    <!-- VNC -->
+    <param name="preconditions/simulator_opts/vnc_password" type="str" value="$(optenv R2S2_VNC_PASSWORD GXnyjQUGXEM)" />
     <!-- strategy_image  -->
     <param name="preconditions/strategy_image/pull_policy" type="str" value="$(optenv R2S2_STRATEGY_IMAGE_PULL_POLICY IfNotPresent)" />
     <rosparam param="preconditions/strategy_image/pull_secrets" subst_value="True">$(optenv R2S2_STRATEGY_IMAGE_PULL_SECRETS '[]')</rosparam>

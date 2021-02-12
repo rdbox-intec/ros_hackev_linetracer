@@ -2,12 +2,17 @@
 
 ![linetrace](./docs/images/linetrace.gif)
 
-This is a ROS package to understand R2S2 (RDBOX Robotics Simulation System).  
+This repository shows how to use the system test function of R2S2 (RDBOX Robotics Simulation System).  
+
+You will first learn how to run a ROS package in **a standalone container** .  
+
+## Subject
+
+![PID](./docs/images/r2s2_lintrace_principle.png)
+
 We will use a robot called ev3rt.  
-
-## Story
-
 This robot uses PID control to perform smooth line tracing.  
+PID control is performed based on the value of a brightness sensor attached to the bottom of the robot.  
 Test that it reaches the goal more quickly and accurately by changing various parameters of the PID.
 
 ## The ROS Topics and Nodes
@@ -34,6 +39,12 @@ At the same time, it also exposes information obtained from wheels such as odom 
 
 ## Usage
 
+### Clone
+
+```bash
+git clone --recursive https://github.com/rdbox-intec/ros_hackev_linetracer.git
+```
+
 ### Run
 
 ```bash
@@ -52,14 +63,34 @@ This brightness is based on color_sensor_reflect.
 |  td     | float       | parameter of PID control     |
 |  power  | int(0-100)% | motor power                  |
 
-### Unit Test
+### Unit Test (with ROSTEST)
 
 ```bash
 rostest ros_hackev_linetracer default.test
 ```
 
-### System Test (with R2S2.)
+### System Test (with R2S2)
 
 ```bash
 docker run --rm --env-file=/tmp/env-file -v "$R2S2_CERT":"$R2S2_CERT" "$BUILD_IMAGE_NAME" rostest ros_hackev_linetracer integratin.test
 ```
+
+## Detail about test
+
+The two types of testing methods are described below.
+
+- Unit Test
+- System Test
+
+### Unit Test
+
+ROS provides rotest as a runner for unit tests. See the [rostest \- ROS Wiki](http://wiki.ros.org/rostest) for more details.  
+Based on the above ROS Wiki article, we have implemented the following test file. This will be very helpful for you.  
+
+- [default.test](./ros_hackev_linetracer/test/default.test)
+- [test_linetracer.py](./ros_hackev_linetracer/scripts/test_linetracer.py)
+- [mock.py](./ros_hackev_linetracer/scripts/mock.py)
+
+### System Test
+
+TBD

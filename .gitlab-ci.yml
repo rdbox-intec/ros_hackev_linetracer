@@ -1,0 +1,34 @@
+variables:
+  DOCKER_VERSION: 19.03.13
+  GIT_SUBMODULE_STRATEGY: recursive
+
+  DOCKER_DRIVER: overlay2
+
+  BUILD_IMAGE_NAME: "$CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA"
+
+  BUILD_IMAGE_NAME_LATEST: "$CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:latest"
+
+  CI_APPLICATION_TAG: "$CI_COMMIT_SHA"
+  CI_APPLICATION_REPOSITORY: "$CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG/$CI_JOB_NAME"
+
+  DOCKER_HOST: tcp://localhost:2376
+  DOCKER_TLS_CERTDIR: "/certs"
+  DOCKER_TLS_VERIFY: 1
+  DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
+  CA_CERTIFICATE: "$CI_SERVER_TLS_CA_FILE"
+
+  R2S2_STRATEGY_IMAGE_REGISTRY: "$CI_REGISTRY"
+  R2S2_STRATEGY_IMAGE_REPOSITORY: "$CI_PROJECT_PATH/$CI_COMMIT_REF_SLUG"
+  R2S2_STRATEGY_IMAGE_TAG: "$CI_COMMIT_SHA"
+
+stages:
+  - lint
+  - build
+  - unit-test
+  - integratin-test
+
+include:
+  - local: .gitlab/ci/lint.gitlab-ci.yml
+  - local: .gitlab/ci/build.gitlab-ci.yml
+  - local: .gitlab/ci/unit-test.gitlab-ci.yml
+  - local: .gitlab/ci/integratin-test.gitlab-ci.yml

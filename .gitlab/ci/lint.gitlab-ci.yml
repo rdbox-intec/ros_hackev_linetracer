@@ -1,0 +1,5 @@
+lint:
+  stage: lint
+  image: alpine/flake8:3.8.4
+  script:
+    - flake8 ros_hackev_linetracer/scripts
